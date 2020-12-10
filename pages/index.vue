@@ -1,65 +1,42 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">NuxtBnB</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div>
+    <div
+      v-for="home of homes"
+      :key="home.objectID"
+      style="float: left; margin: 10px"
+    >
+      <home-card :home="home" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import homes from '~/data/homes'
+import HomeCard from '~/components/HomeCard.vue'
 
-export default Vue.extend({})
+export default {
+  components: { HomeCard },
+  data() {
+    return {
+      homes: homes.slice(0, 3),
+    }
+  },
+  head() {
+    return {
+      title: 'HomePage',
+      meta: [
+        {
+          name: `description`,
+          content: `This is a homepage!`,
+
+          // Nuxt combines metas from multiple places in app
+          // It needs to keep track of which ones are new versus which ones are being updated
+          // it does this by using a property called hid.
+          // the value does not matter.
+          hid: `description`,
+        },
+      ],
+    }
+  },
+}
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
