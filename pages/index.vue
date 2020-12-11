@@ -11,11 +11,11 @@
 </template>
 
 <script lang="ts">
-import homes from '~/data/homes'
+import homes from '~/data/homes.json'
 import HomeCard from '~/components/HomeCard.vue'
 
 export default {
-  components: { HomeCard },
+  components: [HomeCard],
   data() {
     return {
       homes: homes.slice(0, 3),

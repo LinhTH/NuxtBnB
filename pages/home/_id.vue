@@ -3,17 +3,20 @@
 </template>
 
 <script lang="ts">
-import homes from '~/data/homes'
+import Vue from 'vue'
+import homes from '~/data/homes.json'
 
-export default {
+export default Vue.extend({
   data() {
     return {
-      home: {},
+      home: {} as any,
     }
   },
   // In Nuxt, the method is ran on both the server and on the client on the first page view
   created() {
-    this.home = homes.find((home) => home.objectID === this.$route?.params?.id)
+    this.home = homes.find(
+      (home: any) => home.objectID === this.$route?.params?.id
+    )
   },
-}
+})
 </script>
