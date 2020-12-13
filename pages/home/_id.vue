@@ -27,18 +27,25 @@
 </template>
 
 <script>
-import homes from '~/data/homes.json'
-
 export default {
   layout: 'red',
+
+  /**
+   * This is a special Nuxt hook that runs once server side and then run again client-side when navigating to other routes. Whatever you return from asyncData will be merged with the page's local data object. Nuxt will wait for the response before rendering the page
+   * @param params
+   * @param $dataApi
+   * @returns {Promise<{home: *}>}
+   */
+  async asyncData({ params, $dataApi }) {
+    const home = await $dataApi.getHome(params?.id)
+    return {
+      home,
+    }
+  },
   data() {
     return {
       home: {},
     }
-  },
-  // In Nuxt, the method is ran on both the server and on the client on the first page view
-  created() {
-    this.home = homes.find((home) => home.objectID === this.$route?.params?.id)
   },
   mounted() {
     this.$maps.showMap(

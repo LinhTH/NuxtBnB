@@ -22,6 +22,7 @@ export default {
     //   mode: 'client',
     // },
     '~/plugins/maps.client.js', // -> because the name contains 'client' so we do not need to declare explicitly mode: 'client'
+    '~/plugins/dataApi.js',
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
