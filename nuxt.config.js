@@ -16,7 +16,13 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: [
+    // {
+    //   src: '~/plugins/maps.client.js',
+    //   mode: 'client',
+    // },
+    '~/plugins/maps.client.js', // -> because the name contains 'client' so we do not need to declare explicitly mode: 'client'
+  ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   // Although the automatic component scan is helpful but it is not clear and the IDE can not detect the tag without explicit import,
