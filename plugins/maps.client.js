@@ -1,8 +1,18 @@
+/**
+ * @param _context: contains a ton of internal objects such as Vuex store, Router, the Root Vue instance
+ * @param inject: injects an object or value into your app that's available throughout Vue and Vuex
+ * IMPORTANT: always declare the plugin in nuxt.config.js
+ */
 export default function (_context, inject) {
   let mapLoaded = false
   let mapWaiting = null
 
   addScript()
+
+  /**
+   * Inject takes two parameters. The first one is the name of what you are injecting. In the property page it is referred by this.$<name>
+   * The seconf parameter is the object or value you want to be returned.
+   */
   inject('maps', {
     showMap,
   })
