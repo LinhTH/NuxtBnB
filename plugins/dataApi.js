@@ -13,7 +13,7 @@ export default function (_context, inject) {
   async function getHome(homeId) {
     return unwrap(
       await fetch(
-        `https://${appId}-dsn.algoliaa.net/1/indexes/homes/${homeId}`,
+        `https://${appId}-dsn.algolia.net/1/indexes/homes/${homeId}`,
         {
           headers,
         }
