@@ -27,13 +27,15 @@
       <img :src="review.reviewer.image" /><br />
       {{ review.reviewer.name }} <br />
       {{ formatDate(review.date) }} <br />
-      {{ review.comment }} <br />
+      <short-text :text="review.comment" :target="150" /> <br />
     </div>
   </div>
 </template>
 
 <script>
+import ShortText from '@/components/ShortText'
 export default {
+  components: { ShortText },
   layout: 'red',
 
   /**
@@ -79,7 +81,7 @@ export default {
   methods: {
     formatDate(dateStr) {
       const date = new Date(dateStr)
-      return date.toLocaleDateString(undefined, {
+      return date.toLocaleDateString('vi-VN', {
         month: 'long',
         year: 'numeric',
       })
