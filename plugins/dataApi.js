@@ -8,17 +8,41 @@ export default function (_context, inject) {
 
   inject('dataApi', {
     getHome,
+    getReviewsByHomeId,
   })
 
   async function getHome(homeId) {
-    return unwrap(
-      await fetch(
-        `https://${appId}-dsn.algolia.net/1/indexes/homes/${homeId}`,
-        {
-          headers,
-        }
+    try {
+      return unwrap(
+        await fetch(
+          `https://${appId}-dsn.algolia.net/1/indexes/homes/${homeId}`,
+          {
+            headers,
+          }
+        )
       )
-    )
+    } catch (error) {
+      return getErrorResponse(error)
+    }
+  }
+
+  async function getReviewsByHomeId(homeId) {
+    try {
+      return unwrap(
+        await fetch(
+          `https://${appId}-dsn.algolia.net/1/indexes/reviews/query`,
+          {
+            headers,
+            method: 'POST',
+            body: JSON.stringify({
+              filters: `homeId:${homeId}`,
+            }),
+          }
+        )
+      )
+    } catch (error) {
+      return getErrorResponse(error)
+    }
   }
 
   async function unwrap(response) {
@@ -29,6 +53,15 @@ export default function (_context, inject) {
       ok,
       status,
       statusText,
+    }
+  }
+
+  function getErrorResponse(error) {
+    return {
+      ok: false,
+      status: 500,
+      statusText: error.message,
+      json: {},
     }
   }
 }
